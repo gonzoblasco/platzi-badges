@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 export default class BadgeForm extends Component {
   handleClick = e => {
@@ -8,7 +8,7 @@ export default class BadgeForm extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <h1>New Attendant</h1>
         <form>
           <div className="form-group">
@@ -63,7 +63,7 @@ export default class BadgeForm extends Component {
           </div>
           <button onClick={ this.handleClick } className="btn btn-primary">Save</button>
         </form>
-      </div>
+      </Fragment>
     );
   }
 }
