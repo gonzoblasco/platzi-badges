@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 
 import './styles/BadgeNew.css';
-import header from '../images/badge-header.svg';
+import header from '../images/platziconf-logo.svg';
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm';
+import api from '../api';
 
 class BadgeNew extends Component {
   state = {
@@ -25,6 +26,18 @@ class BadgeNew extends Component {
     });
   };
 
+  handleSubmit = async e => {
+    e.preventDefault();
+    this.setState({ loading: true, error: null });
+
+    try {
+      await api.badges.create(this.state.form);
+      this.setState({ loading: false });
+    } catch ( error ) {
+      this.setState({ loading: false, error: error });
+    }
+  };
+
   render() {
     return (
       <Fragment>
@@ -37,16 +50,20 @@ class BadgeNew extends Component {
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={ this.state.form.firstName }
-                lastName={ this.state.form.lastName }
-                jobTitle={ this.state.form.jobTitle }
-                twitter={ this.state.form.twitter }
-                email={ this.state.form.email }
-                avatarUrl="https://2.gravatar.com/avatar/bfed63725b27aca51adf1f268754435f?s=400&d=mm"
+                firstName={ this.state.form.firstName || 'First Name' }
+                lastName={ this.state.form.lastName || 'Last Name' }
+                jobTitle={ this.state.form.jobTitle || 'Job Title' }
+                twitter={ this.state.form.twitter || 'Twitter Username' }
+                email={ this.state.form.email || 'Email Address' }
+                avatarUrl="https://2.gravatar.com/avatar/b0e83dd649a9a0789ca32589d38be1fe?s=400&d=mm"
               />
             </div>
             <div className='col-6'>
-              <BadgeForm onChange={ this.handleChange } formValues={ this.state.form } />
+              <BadgeForm
+                onChange={ this.handleChange }
+                formValues={ this.state.form }
+                onSubmit={ this.handleSubmit }
+              />
             </div>
           </div>
         </div>

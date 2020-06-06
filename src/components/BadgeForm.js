@@ -2,15 +2,14 @@ import React, { Component, Fragment } from 'react';
 
 export default class BadgeForm extends Component {
   handleClick = e => {
-    e.preventDefault();
-    console.log(this.state);
+    console.log('Button was clicked');
   };
 
   render() {
     return (
       <Fragment>
         <h1>New Attendant</h1>
-        <form>
+        <form onSubmit={ this.props.onSubmit }>
           <div className="form-group">
             <label>First Name</label>
             <input

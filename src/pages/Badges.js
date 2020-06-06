@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import './styles/Badges.css';
-import confLogo from '../images/badge-header.svg';
+import confLogo from '../images/platziconf-logo.svg';
 import BadgesList from '../components/BadgesList';
 import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';

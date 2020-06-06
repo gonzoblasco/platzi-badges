@@ -19,7 +19,7 @@
 }
 
 .Badges_conf-logo {
-    margin-bottom: 2rem;
+    max-height: 100px;
 }
 
 .Badges__buttons {
