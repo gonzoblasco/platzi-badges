@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 export default class BadgeForm extends Component {
-  handleClick = e => {
+  handleClick = () => {
     console.log('Button was clicked');
   };
 
