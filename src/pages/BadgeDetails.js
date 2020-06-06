@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 
 import './styles/BadgeDetails.css';
@@ -43,6 +44,7 @@ export default (props) => {
               </div>
               <div>
                 <button className='btn btn-danger'>Delete</button>
+                { ReactDOM.createPortal(<h1>Hola, realmente no estoy aquí</h1>, document.getElementById('modal')) }
               </div>
             </div>
           </div>
