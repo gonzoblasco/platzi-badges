@@ -22,6 +22,7 @@ export default class BadgeDetails extends Component {
 
   fetchData = async () => {
     this.setState({ loading: true, error: null });
+
     try {
       const data = await api.badges.read(
         this.props.match.params.badgeId,
