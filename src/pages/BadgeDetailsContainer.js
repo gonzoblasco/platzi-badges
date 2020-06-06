@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import BadgeDetails from './BadgeDetails';
 import PageError from '../components/PageError';
@@ -12,6 +12,7 @@ export default class BadgeDetailsContainer extends Component {
     loading: true,
     error: null,
     data: undefined,
+    modalIsOpen: false,
   };
 
   componentDidMount() {
@@ -31,6 +32,31 @@ export default class BadgeDetailsContainer extends Component {
     }
   };
 
+  handleOpenModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
+
+  handleDeleteBadge = async () => {
+    this.setState(
+      { loading: true, error: null },
+    );
+
+    try {
+      await api.badges.remove(this.props.match.params.badgeId);
+      this.setState({ loading: false });
+
+      this.props.history.push('/badges');
+    } catch ( error ) {
+      this.setState(
+        { loading: false, error: error },
+      );
+    }
+  };
+
   render() {
     if ( this.state.loading ) {
       return <PageLoading />;
@@ -41,7 +67,13 @@ export default class BadgeDetailsContainer extends Component {
     }
 
     return (
-      <BadgeDetails badge={this.state.data} />
+      <BadgeDetails
+        onCloseModal={ this.handleCloseModal }
+        onDeleteBadge={ this.handleDeleteBadge }
+        onOpenModal={ this.handleOpenModal }
+        modalIsOpen={ this.state.modalIsOpen }
+        badge={ this.state.data }
+      />
     );
   }
 }

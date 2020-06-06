@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './styles/BadgeDetails.css';
 import confLogo from '../images/platziconf-logo.svg';
 
 import Badge from '../components/Badge';
+import DeleteBadgeModal from '../components/DeleteBadgeModal';
 
 export default (props) => {
   const { badge } = props;
@@ -43,8 +43,17 @@ export default (props) => {
                 <Link to={ `/badges/${ badge.id }/edit` } className='btn btn-primary mb-4'>Edit</Link>
               </div>
               <div>
-                <button className='btn btn-danger'>Delete</button>
-                { ReactDOM.createPortal(<h1>Hola, realmente no estoy aquí</h1>, document.getElementById('modal')) }
+                <button
+                  className='btn btn-danger'
+                  onClick={ props.onOpenModal }
+                >
+                  Delete
+                </button>
+                <DeleteBadgeModal
+                  isOpen={ props.modalIsOpen }
+                  onClose={ props.onCloseModal }
+                  onDeleteBadge={ props.onDeleteBadge }
+                />
               </div>
             </div>
           </div>
